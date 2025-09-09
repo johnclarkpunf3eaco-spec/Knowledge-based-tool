@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Notes Generator</title>
+  <link rel="stylesheet" href="backend/styles.css" />
+</head>
+<body>
+  <div class="tab-container">
+    <h2>Notes Generator</h2>
+    <div class="tabs">
+      <button class="tab-button active" onclick="showTab('signup')">Right Party</button>
+      <button class="tab-button" onclick="showTab('signin')">Third Party</button>
+      <button class="tab-button" onclick="showTab('contact')">Bankruptcy</button>
+    </div>
+
+    <div class="tab-content" id="signup">
+      <div class="radio-group">
+	<label><input type="checkbox" id="chkMerchRec" onchange="updateActionsTaken()"> Merchandise Recovery</label>
+        <label><input type="radio" name="callDirection" value="Inbound" onchange="updateActionsTaken()"> Inbound</label>
+        <label><input type="radio" name="callDirection" value="Outbound" onchange="updateActionsTaken()"> Outbound</label>
+      </div>
+
+      <input type="number" id="accountID" placeholder="Account ID" oninput="updateActionsTaken()" />
+      <input type="text" id="name" placeholder="Name" oninput="updateActionsTaken()" />
+
+      <!-- Checkbox + Input for Past Due -->
+      <label><input type="checkbox" id="chkPastDue" onchange="toggleInputVisibility('chkPastDue', 'pastDue')" /> Past Due</label>
+      <input type="text" id="pastDue" placeholder="Past Due" oninput="updateActionsTaken()" style="display:none;" />
+
+      <!-- Checkbox + Input for Remaining Contract Balance -->
+      <label><input type="checkbox" id="chkRemBal" onchange="toggleInputVisibility('chkRemBal', 'remBal')" /> Remaining Contract Balance</label>
+      <input type="text" id="remBal" placeholder="Remaining Contract Balance" oninput="updateActionsTaken()" style="display:none;" />
+
+      <!-- Checkbox + Input for EPO/90Day -->
+      <label><input type="checkbox" id="chkEpoDay" onchange="toggleInputVisibility('chkEpoDay', 'epODay')" /> EPO/90Day</label>
+      <input type="text" id="epODay" placeholder="EPO/90Day" oninput="updateActionsTaken()" style="display:none;" />
+      <textarea id="actions" placeholder="Actions" oninput="updateActionsTaken()" /></textarea>
+
+      <textarea id="actionsTaken" placeholder="Actions Taken" readonly></textarea>
+
+      <div class="button-group">
+        <button class="submit-btn" onclick="copyText('signup')">Copy</button>
+        <button class="submit-btn clear-btn" onclick="clearForm('signup')">Clear</button>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="signin">
+      <select id="select" onchange="copySelectedOption()">
+  <option value="">--Select--</option>
+  <option value="OB Ghost Call">OB Ghost Call</option>
+<option value="OB Call Dropped Disconnected">OB Call Dropped Disconnected</option>
+<option value="OB Routed to VM, No Message Left">OB Routed to VM, No Message Left</option>
+<option value="OB Routed to VM, Message Left">OB Routed to VM, Message Left</option>
+<option value="OB Talked to Third Party">OB Talked to Third Party</option>
+<option value="OB Talked to Third Party Transferred to Spanish / Successful">OB Talked to Third Party Transferred to Spanish / Successful</option>
+<option value="OB Talked to Third Party Transferred to Spanish / Call Dropped while transferring">OB Talked to Third Party Transferred to Spanish / Call Dropped while transferring</option>
+<option value="IB Ghost Call">IB Ghost Call</option>
+<option value="IB Call Dropped Disconnected">IB Call Dropped Disconnected</option>
+<option value="IB Routed to VM, No Message Left">IB Routed to VM, No Message Left</option>
+<option value="IB Routed to VM, Message Left">IB Routed to VM, Message Left</option>
+<option value="IB Talked to Third Party">IB Talked to Third Party</option>
+<option value="IB Talked to Third Party Transferred to Spanish / Successful">IB Talked to Third Party Transferred to Spanish / Successful</option>
+<option value="IB Talked to Third Party Transferred to Spanish / Call Dropped while transferring">IB Talked to Third Party Transferred to Spanish / Call Dropped while transferring</option>
+  <option value="Wrong Number">Wrong Number</option>
+  <!-- Add more options as needed -->
+</select>
+      <div class="button-group">
+<button class="submit-btn clear-btn" onclick="clearForm('signin')">Clear</button>
+	</div>
+    </div>
+
+    <div class="tab-content hidden" id="contact">
+      <input type="text" id="case" placeholder="Case#" oninput="updateBankruptcyNote()">
+<input type="text" id="chapter" placeholder="Chapter" oninput="updateBankruptcyNote()">
+<input type="text" id="attNm" placeholder="Attorney's Name" oninput="updateBankruptcyNote()">
+<input type="text" id="attCtn" placeholder="Attorney's Contact#" oninput="updateBankruptcyNote()">
+<input type="text" id="adiN" placeholder="Additional Information" oninput="updateBankruptcyNote()">
+      <textarea id="actionsTakens" placeholder="Your Message" readonly></textarea>
+      <div class="button-group">
+  		<button class="submit-btn" onclick="copyText('contact')">Copy</button>
+<button class="submit-btn clear-btn" onclick="clearForm('contact')">Clear</button>
+	</div> 
+    </div>
+    
+    <footer>
+      <p>Notes Generator | Design by John Clark Punzalan</p>
+    </footer>
+  </div>
+
+  <script src="backend/script.js"></script>
+  
+</body>
+</html>
